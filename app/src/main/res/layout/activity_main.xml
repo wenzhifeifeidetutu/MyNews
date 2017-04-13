@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+<!--<TextView-->
+    <!--android:id="@+id/society_news"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="社会新闻"-->
+    <!--android:textSize="20sp"-->
+    <!--/>-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/amusement_news"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="娱乐新闻"-->
+        <!--android:textSize="20sp"-->
+        <!--/>-->
+    <!--<TextView-->
+        <!--android:id="@+id/technology_news"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="科技新闻"-->
+        <!--android:textSize="20sp"-->
+        <!--/>-->
+    <!--<TextView-->
+        <!--android:id="@+id/gym_news"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="体育新闻"-->
+        <!--android:textSize="20sp"-->
+        <!--/>-->
+
+   <android.support.design.widget.TabLayout
+       android:id="@+id/Tabs"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       >
+
+   </android.support.design.widget.TabLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v4.view.ViewPager>
+
+
+</LinearLayout>
