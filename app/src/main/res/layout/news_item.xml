@@ -29,7 +29,7 @@
             android:maxLines="1"
             android:ellipsize="end"
             android:textColor="@color/descriptionText"
-            android:textSize="15sp"
+            android:textSize="12sp"
             android:text="搜狐新闻"
             />
         <TextView
@@ -37,9 +37,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:maxLines="2"
             android:gravity="center"
-            android:textSize="21sp"
+            android:textSize="18sp"
             android:textColor="@color/titleText"
             android:text="一个帅二狗"
             />

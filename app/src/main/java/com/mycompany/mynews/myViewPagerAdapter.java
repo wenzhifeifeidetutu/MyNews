@@ -9,7 +9,7 @@ import android.support.v4.app.FragmentPagerAdapter;
  * Created by Administrator on 2017/4/13.
  */
 
-public class myViewPagerAdapter  extends FragmentPagerAdapter{
+public class myViewPagerAdapter  extends FragmentPagerAdapter {
 
     private Context myContext;
 
@@ -21,13 +21,33 @@ public class myViewPagerAdapter  extends FragmentPagerAdapter{
     @Override
     public Fragment getItem(int position) {
         if (position == 0) {
-            return new
+            return new SocialNewsFragment();
+        }else if (position == 1) {
+            return new ScienceNewsFragment();
+        }else if (position == 2) {
+            return new GymFragment();
+        }else  {
+            return new AmusementFragment();
         }
-        return null;
+
     }
 
     @Override
     public int getCount() {
-        return 0;
+        return 4;
+    }
+
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        if (position == 0) {
+            return myContext.getString(R.string.view_one);
+        }else if (position == 1) {
+            return myContext.getString(R.string.view_two);
+        }else if (position == 2) {
+            return myContext.getString(R.string.view_three);
+        }else {
+            return myContext.getString(R.string.view_four);
+        }
     }
 }
