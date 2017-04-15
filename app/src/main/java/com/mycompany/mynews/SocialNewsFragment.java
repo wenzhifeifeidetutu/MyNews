@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.thefinestartist.finestwebview.FinestWebView;
@@ -35,6 +36,11 @@ public class SocialNewsFragment extends Fragment implements LoaderManager.Loader
 
     private static  final int News_LOADER_ID = 1;
 
+    private TextView emptyText ;
+
+    private ProgressBar noWorkProgressBar;
+
+
 
     public SocialNewsFragment() {
         // Required empty public constructor
@@ -52,6 +58,12 @@ public class SocialNewsFragment extends Fragment implements LoaderManager.Loader
         myNewsAdapter =new MyNewsAdapter(getActivity(), newsList);
 
         socialListView = (ListView)rootView.findViewById(R.id.society_news_list_view);
+
+        //设置progressBar 和emptyText
+        emptyText = (TextView) rootView.findViewById(R.id.no_network_info);
+        noWorkProgressBar = (ProgressBar)rootView.findViewById(R.id.progressBar);
+
+
         if (socialListView != null) {
             socialListView.setAdapter(myNewsAdapter);
             //设置点击事件 使用webView来打开
@@ -81,6 +93,10 @@ public class SocialNewsFragment extends Fragment implements LoaderManager.Loader
 
         }else {
             //没有网络连接状态
+            noWorkProgressBar.setVisibility(View.GONE);
+            emptyText.setText(R.string.no_network);
+
+
         }
 
 
@@ -110,6 +126,7 @@ public class SocialNewsFragment extends Fragment implements LoaderManager.Loader
     @Override
     public void onLoadFinished(android.support.v4.content.Loader<List<News>> loader, List<News> data) {
         myNewsAdapter.clear();
+        noWorkProgressBar.setVisibility(View.GONE);
 
         if (data != null &&  !data.isEmpty()) {
 

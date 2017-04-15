@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.thefinestartist.finestwebview.FinestWebView;
 
@@ -34,6 +36,10 @@ public class AmusementFragment extends Fragment implements LoaderManager.LoaderC
 
     private static final String AMUSEMENTURI = "https://api.tianapi.com/huabian/?";
 
+    private TextView emptyText ;
+
+    private ProgressBar noWorkProgressBar;
+
 
     public AmusementFragment() {
         // Required empty public constructor
@@ -48,6 +54,9 @@ public class AmusementFragment extends Fragment implements LoaderManager.LoaderC
         myNewsAdapter = new MyNewsAdapter(getActivity(), new ArrayList<News>());
 
         amusementListView = (ListView)rootView.findViewById(R.id.amusement_news_list_view);
+        emptyText = (TextView)rootView.findViewById(R.id.no_network_info);
+        noWorkProgressBar = (ProgressBar)rootView.findViewById(R.id.progressBar);
+
 
         if (amusementListView != null) {
             amusementListView.setAdapter(myNewsAdapter);
@@ -73,7 +82,8 @@ public class AmusementFragment extends Fragment implements LoaderManager.LoaderC
             loaderManager.initLoader(LOADER_ID, null, this);
 
         }else {
-
+            noWorkProgressBar.setVisibility(View.GONE);
+            emptyText.setText(R.string.no_network);
 
         }
 
@@ -100,6 +110,7 @@ public class AmusementFragment extends Fragment implements LoaderManager.LoaderC
     @Override
     public void onLoadFinished(android.support.v4.content.Loader<List<News>> loader, List<News> data) {
         myNewsAdapter.clear();
+        noWorkProgressBar.setVisibility(View.GONE);
 
         if (data != null && !data.isEmpty()) {
             myNewsAdapter.addAll(data);

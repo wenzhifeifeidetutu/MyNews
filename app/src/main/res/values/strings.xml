@@ -9,4 +9,6 @@
     <string name="view_three">体育</string>
     <string name="view_four">娱乐</string>
 
+    <string name="no_network">没有网络连接，请检查网络</string>
+
 </resources>

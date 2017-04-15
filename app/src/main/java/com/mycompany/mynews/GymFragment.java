@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.thefinestartist.finestwebview.FinestWebView;
 
@@ -32,6 +34,9 @@ public class GymFragment extends Fragment implements LoaderManager.LoaderCallbac
     private static final String APIURLGYM = "https://api.tianapi.com/tiyu/?";
 
     private static final int LODERID = 4;
+    private TextView emptyText ;
+
+    private ProgressBar noWorkProgressBar;
 
 
     public GymFragment() {
@@ -47,6 +52,10 @@ public class GymFragment extends Fragment implements LoaderManager.LoaderCallbac
         myNewsAdapter = new MyNewsAdapter(getActivity(), new ArrayList<News>());
 
         gymNewsListView = (ListView)rootView.findViewById(R.id.gym_news_list_view);
+
+        emptyText = (TextView)rootView.findViewById(R.id.no_network_info);
+        noWorkProgressBar = (ProgressBar)rootView.findViewById(R.id.progressBar);
+
 
         if (gymNewsListView != null) {
             gymNewsListView.setAdapter(myNewsAdapter);
@@ -75,6 +84,9 @@ public class GymFragment extends Fragment implements LoaderManager.LoaderCallbac
 
         }else {
             //没网络情况
+            noWorkProgressBar.setVisibility(View.GONE);
+            emptyText.setText(R.string.no_network);
+
         }
 
 
@@ -101,7 +113,7 @@ public class GymFragment extends Fragment implements LoaderManager.LoaderCallbac
     @Override
     public void onLoadFinished(android.support.v4.content.Loader<List<News>> loader, List<News> data) {
         myNewsAdapter.clear();
-
+        noWorkProgressBar.setVisibility(View.GONE);
         if (data != null && !data.isEmpty()) {
             myNewsAdapter.addAll(data);
         }

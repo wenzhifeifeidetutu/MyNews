@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.thefinestartist.finestwebview.FinestWebView;
 
@@ -31,6 +33,10 @@ public class ScienceNewsFragment extends Fragment implements LoaderManager.Loade
 
     private static  final int News_LOADER_ID_2 = 2;
 
+    private TextView emptyText ;
+
+    private ProgressBar noWorkProgressBar;
+
 
     public ScienceNewsFragment() {
         // Required empty public constructor
@@ -44,6 +50,10 @@ public class ScienceNewsFragment extends Fragment implements LoaderManager.Loade
 
         myNewsAdapter = new MyNewsAdapter(getActivity(), new ArrayList<News>());
         scienceListView = (ListView)rootView.findViewById(R.id.science_news_list_view);
+        emptyText = (TextView)rootView.findViewById(R.id.no_network_info);
+        noWorkProgressBar = (ProgressBar)rootView.findViewById(R.id.progressBar);
+
+
         if (scienceListView != null) {
             scienceListView.setAdapter(myNewsAdapter);
             scienceListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -70,6 +80,9 @@ public class ScienceNewsFragment extends Fragment implements LoaderManager.Loade
             scienceLoaderManager.initLoader(News_LOADER_ID_2, null,this);
             //没有网络状态的操作
         }else {
+            noWorkProgressBar.setVisibility(View.GONE);
+            emptyText.setText(R.string.no_network);
+
 
         }
 
@@ -100,6 +113,7 @@ public class ScienceNewsFragment extends Fragment implements LoaderManager.Loade
     @Override
     public void onLoadFinished(android.support.v4.content.Loader<List<News>> loader, List<News> data) {
         myNewsAdapter.clear();
+        noWorkProgressBar.setVisibility(View.GONE);
 
         if (loader != null && !data.isEmpty()) {
             myNewsAdapter.addAll(data);
