@@ -17,7 +17,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+
 
 //        socialTextView = (TextView) findViewById(R.id.society_news);
 //        amusementTextView = (TextView) findViewById(R.id.amusement_news);

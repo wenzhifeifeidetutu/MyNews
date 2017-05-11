@@ -40,14 +40,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-
-        <activity android:name=".NewsWebView"/>
-
+        <activity android:name=".NewsWebView" />
         <activity
             android:name="com.thefinestartist.finestwebview.FinestWebViewActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="sensor"
             android:theme="@style/FinestWebViewTheme.Light" />
+        <activity android:name=".SettingActivity"></activity>
     </application>
 
 </manifest>

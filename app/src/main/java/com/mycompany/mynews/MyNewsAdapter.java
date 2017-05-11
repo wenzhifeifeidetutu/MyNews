@@ -25,16 +25,6 @@ import java.util.List;
  */
 
 public class MyNewsAdapter extends ArrayAdapter<News> {
-    private TextView descriptionTextView;
-
-    private TextView contentTextView;
-
-    private TextView timeofmouth;
-    private TextView dataofyear;
-
-    private ImageView pictureImage;
-
-
 
 
     public MyNewsAdapter(Context context, List<News> newsList) {
@@ -44,31 +34,39 @@ public class MyNewsAdapter extends ArrayAdapter<News> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
         View newsItemView = convertView;
+        ViewHolder viewHolder;
+
         if (newsItemView == null) {
             newsItemView = LayoutInflater.from(getContext()).inflate(R.layout.news_item, parent, false);
+            viewHolder  = new ViewHolder();
+            viewHolder.descriptionTextView = (TextView)newsItemView.findViewById(R.id.description_of_item);
+            viewHolder.contentTextView = (TextView)newsItemView.findViewById(R.id.title_of_item);
+            viewHolder.timeofmouth = (TextView)newsItemView.findViewById(R.id.moth_of_time);
+            viewHolder.dataofyear = (TextView)newsItemView.findViewById(R.id.year_of_data);
+            viewHolder.pictureImage = (ImageView)newsItemView.findViewById(R.id.image_of_item);
+
+            newsItemView.setTag(viewHolder);
+        }else {
+            viewHolder = (ViewHolder) newsItemView.getTag();
         }
 
         News newsItem = getItem(position);
 
-        descriptionTextView = (TextView)newsItemView.findViewById(R.id.description_of_item);
-        contentTextView = (TextView)newsItemView.findViewById(R.id.title_of_item);
-        timeofmouth = (TextView)newsItemView.findViewById(R.id.moth_of_time);
-        dataofyear = (TextView)newsItemView.findViewById(R.id.year_of_data);
-        pictureImage = (ImageView)newsItemView.findViewById(R.id.image_of_item);
 
-        descriptionTextView.setText(newsItem.getDescription());
-        contentTextView.setText(newsItem.getTitile());
+
+        viewHolder.descriptionTextView.setText(newsItem.getDescription());
+        viewHolder.contentTextView.setText(newsItem.getTitile());
         String time = newsItem.getTime();
         String[] times = time.split(" ");
-        dataofyear.setText(times[0]);
-        timeofmouth.setText(times[1]);
+        viewHolder.dataofyear.setText(times[0]);
+        viewHolder.timeofmouth.setText(times[1]);
 
         //设置图片
         String picUriString = newsItem.getPicUrl();
         //去掉字符串中的_ss
         String theTruePic = picUriString.replace("_ss", "");
 
-        DownloadImageTask downloadImageTask = new DownloadImageTask(pictureImage);
+        DownloadImageTask downloadImageTask = new DownloadImageTask(viewHolder.pictureImage);
         //执行
         downloadImageTask.execute(theTruePic);
 
@@ -76,6 +74,18 @@ public class MyNewsAdapter extends ArrayAdapter<News> {
 
         return newsItemView;
 
+
+    }
+
+    class ViewHolder {
+        private TextView descriptionTextView;
+
+        private TextView contentTextView;
+
+        private TextView timeofmouth;
+        private TextView dataofyear;
+
+        private ImageView pictureImage;
 
 
     }
